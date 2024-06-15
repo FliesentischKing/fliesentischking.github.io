@@ -8,14 +8,22 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
-    :class="
-      cn(
-        'rounded-xl border bg-card text-card-foreground shadow',
-        props.class,
-      )
-    "
-  >
+  <div :class="cn(
+    'rounded-xl border bg-card text-card-foreground shadow',
+    props.class,
+  )
+    ">
     <slot />
   </div>
 </template>
+
+<style scoped>
+div:hover {
+  border-color: var(--primary);
+  border-width: 1px;
+  transition: 300ms;
+}
+div{
+  transition: 300ms;
+}
+</style>

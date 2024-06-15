@@ -1,21 +1,6 @@
 <script setup lang="ts">
-import { BellRing, Check } from 'lucide-vue-next'
 
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Switch } from '@/components/ui/switch'
-import { cn } from '@/lib/utils'
-import { Progress } from '@/components/ui/progress'
-import { ref } from 'vue'
-
-const currentlyPlaying = [
+var currentlyPlaying = [
   {
     title: 'Super Mario 64',
     description: 'PC Port sm64ex',
@@ -32,7 +17,7 @@ const currentlyPlaying = [
     title: 'Super Mario 3D World',
     description: 'Nintendo Switch Version',
     percentage: 80,
-    image: '82771_Super_Mario_3D_World__Bowsers_Fury.webp',
+    image: '39eaa84fa49b129edaa137171ba60746.jpg',
   },
   {
     title: 'Grand Theft Auto IV: The Lost and Damned',
@@ -48,7 +33,7 @@ const currentlyPlaying = [
   }
 ]
 
-const finishedGames = [
+var finishedGames = [
   {
     title: 'The Legend of Zelda: Ocarina of Time',
     description: 'PC Port Ship of Harkinian',
@@ -66,7 +51,22 @@ const finishedGames = [
   }
 ]
 
-const backlog = [
+var backlog = [
+  {
+    title: 'Shakedown Hawaii',
+    description: '',
+    image: 'd7d2fb293f4cd636bb59ae6386813dd3.png',
+  },
+  {
+    title: 'Retro City Rampage',
+    description: '',
+    image: 'db7f2bf023263eb0a0a8247c5007f49a.png',
+  },
+  {
+    title: 'Golf Story',
+    description: '',
+    image: 'b2f39eaa50e146f33c6ea8cd06889a84.png',
+  },
   {
     title: 'Ape Escape',
     description: '',
@@ -95,7 +95,7 @@ const backlog = [
   {
     title: 'Arise: A Simple Story',
     description: '',
-    image: '70900_Arise_A_Simple_Story.webp',
+    image: '381cea722f1c755b54fa72826e4142e8.png',
   },
   {
     title: 'Banjo-Kazooie',
@@ -192,13 +192,41 @@ const backlog = [
     description: '',
     image: '4ad38ecf2884a47a5efa657f3358e635.png',
   },
+  {
+    title: 'Blood',
+    description: '',
+    image: '0d5db791e260aff09b1844fbbf0b97d5.png'
+  },
+  {
+    title: 'Bowsers Fury',
+    description: '',
+    image: '053b2108e3f9c0adf2a8edf682075323.png'
+  }
 ]
+
+//Sorting the Arrays by object.title so I don't have to format it manually
+currentlyPlaying = useOrderBy(currentlyPlaying, ['title'], ['asc'])
+finishedGames = useOrderBy(finishedGames, ['title'], ['asc'])
+backlog = useOrderBy(backlog, ['title'], ['asc'])
+
 </script>
 
 <template>
   <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-    <p class="font-semibold">Aktuell gespielte Spiele</p>
-    <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+    <Tabs default-value="current">
+    <TabsList>
+      <TabsTrigger value="current">
+        Aktuell gespielte Spiele
+      </TabsTrigger>
+      <TabsTrigger value="finished">
+        Im Stream durchgespielte Spiele
+      </TabsTrigger>
+      <TabsTrigger value="backlog">
+        Spiele, die ich bald streamen will
+      </TabsTrigger>
+    </TabsList>
+    <TabsContent value="current">
+      <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
       <Card v-for="(game, index) in currentlyPlaying" :key="index">
         <CardHeader>
           <CardTitle>{{ game.title }}</CardTitle>
@@ -213,8 +241,8 @@ const backlog = [
         </CardContent>
       </Card>
     </div>
-
-    <p class="font-semibold">Im Stream durchgespielte Spiele</p>
+    </TabsContent>
+    <TabsContent value="finished">
     <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
       <Card v-for="(game, index) in finishedGames" :key="index">
         <CardHeader>
@@ -228,9 +256,9 @@ const backlog = [
         </CardContent>
       </Card>
     </div>
-
-    <p class="font-semibold">Spiele, die ich bald streamen will</p>
-    <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+    </TabsContent>
+    <TabsContent value="backlog">
+      <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
       <Card v-for="(game, index) in backlog" :key="index">
         <CardHeader>
           <CardTitle>{{ game.title }}</CardTitle>
@@ -243,5 +271,8 @@ const backlog = [
         </CardContent>
       </Card>
     </div>
+    </TabsContent>
+  </Tabs>
+
   </main>
 </template>
