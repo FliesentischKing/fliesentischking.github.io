@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import { Icon } from '@iconify/vue'
+
 var currentlyPlaying = [
   {
     title: 'Super Mario 64',
@@ -201,7 +203,22 @@ var backlog = [
     title: 'Bowsers Fury',
     description: '',
     image: '053b2108e3f9c0adf2a8edf682075323.png'
-  }
+  },
+  {
+    title: 'Glitchpunk',
+    description: '',
+    image: 'b03d8174d4677eb0299c12699854ca7e.jpg'
+  },
+  {
+    title: 'American Fugitive',
+    description: '',
+    image: '9fe2132cbfda2218e4928f320f53ce8e.png'
+  },
+  {
+    title: 'Rustler',
+    description: '',
+    image: '35d2535722ed9509e0567e222e3a7d2e.png'
+  },
 ]
 
 //Sorting the Arrays by object.title so I don't have to format it manually
@@ -213,66 +230,73 @@ backlog = useOrderBy(backlog, ['title'], ['asc'])
 
 <template>
   <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-    <Tabs default-value="current">
-    <TabsList>
-      <TabsTrigger value="current">
-        Aktuell gespielte Spiele
-      </TabsTrigger>
-      <TabsTrigger value="finished">
-        Im Stream durchgespielte Spiele
-      </TabsTrigger>
-      <TabsTrigger value="backlog">
-        Spiele, die ich bald streamen will
-      </TabsTrigger>
-    </TabsList>
-    <TabsContent value="current">
-      <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
-      <Card v-for="(game, index) in currentlyPlaying" :key="index">
-        <CardHeader>
-          <CardTitle>{{ game.title }}</CardTitle>
-          <CardDescription>{{ game.description }}</CardDescription>
-        </CardHeader>
-        <CardContent class="grid gap-4">
-          <div>
-            <img :src="game.image" class="h-64 mb-4 rounded-xl object-cover" />
-            Fortschritt: {{ game.percentage }}%
-            <Progress class="mt-4" v-model="game.percentage" />
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-    </TabsContent>
-    <TabsContent value="finished">
-    <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
-      <Card v-for="(game, index) in finishedGames" :key="index">
-        <CardHeader>
-          <CardTitle>{{ game.title }}</CardTitle>
-          <CardDescription>{{ game.description }}</CardDescription>
-        </CardHeader>
-        <CardContent class="grid gap-4">
-          <div>
-            <img :src="game.image" class="h-64 mb-4 rounded-xl object-cover" />
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-    </TabsContent>
-    <TabsContent value="backlog">
-      <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
-      <Card v-for="(game, index) in backlog" :key="index">
-        <CardHeader>
-          <CardTitle>{{ game.title }}</CardTitle>
-          <CardDescription>{{ game.description }}</CardDescription>
-        </CardHeader>
-        <CardContent class="grid gap-4">
-          <div>
-            <img :src="game.image" class="h-64 mb-4 rounded-xl object-cover" />
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-    </TabsContent>
-  </Tabs>
+    <Alert>
+      <Icon icon="radix-icons:update" />
+      <AlertTitle>Es gab ein Update!</AlertTitle>
+      <AlertDescription>
+        Aktualisiert am 03.09.2024
+      </AlertDescription>
+    </Alert>
 
+    <Tabs default-value="current">
+      <TabsList>
+        <TabsTrigger value="current">
+          Aktuell gespielte Spiele
+        </TabsTrigger>
+        <TabsTrigger value="finished">
+          Im Stream durchgespielte Spiele
+        </TabsTrigger>
+        <TabsTrigger value="backlog">
+          Spiele, die ich bald streamen will
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="current">
+        <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+          <Card v-for="(game, index) in currentlyPlaying" :key="index">
+            <CardHeader>
+              <CardTitle>{{ game.title }}</CardTitle>
+              <CardDescription>{{ game.description }}</CardDescription>
+            </CardHeader>
+            <CardContent class="grid gap-4">
+              <div>
+                <img :src="game.image" class="h-64 mb-4 rounded-xl object-cover" />
+                Fortschritt: {{ game.percentage }}%
+                <Progress class="mt-4" v-model="game.percentage" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </TabsContent>
+      <TabsContent value="finished">
+        <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+          <Card v-for="(game, index) in finishedGames" :key="index">
+            <CardHeader>
+              <CardTitle>{{ game.title }}</CardTitle>
+              <CardDescription>{{ game.description }}</CardDescription>
+            </CardHeader>
+            <CardContent class="grid gap-4">
+              <div>
+                <img :src="game.image" class="h-64 mb-4 rounded-xl object-cover" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </TabsContent>
+      <TabsContent value="backlog">
+        <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+          <Card v-for="(game, index) in backlog" :key="index">
+            <CardHeader>
+              <CardTitle>{{ game.title }}</CardTitle>
+              <CardDescription>{{ game.description }}</CardDescription>
+            </CardHeader>
+            <CardContent class="grid gap-4">
+              <div>
+                <img :src="game.image" class="h-64 mb-4 rounded-xl object-cover" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </TabsContent>
+    </Tabs>
   </main>
 </template>
