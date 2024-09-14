@@ -219,6 +219,31 @@ var backlog = [
     description: '',
     image: '35d2535722ed9509e0567e222e3a7d2e.png'
   },
+  {
+    title: 'Dragonball Z: Das Erbe von Goku',
+    description: '',
+    image: '1bd164ad48783b615ca23c04b1f8c20a.png'
+  },
+  {
+    title: 'Dragonball Z: Das Erbe von Goku 2',
+    description: '',
+    image: 'fae504c7f3bdce5b17da7664b3efeded.png'
+  },
+  {
+    title: 'Dragonball Z: Buu\'s Fury',
+    description: '',
+    image: '1dc43796fb1b397a7f2b43180068b580.png'
+  },
+  {
+    title: 'Super Mario World 2: Yoshi\s Island',
+    description: '',
+    image: '59857cc70355243795b398b32447b862.png'
+  },
+  {
+    title: 'Banjo-Kazooie: Schraube Locker',
+    description: '',
+    image: '17faa600670ae46a32ff83f76e83806a.png'
+  },
 ]
 
 //Sorting the Arrays by object.title so I don't have to format it manually
@@ -234,7 +259,7 @@ backlog = useOrderBy(backlog, ['title'], ['asc'])
       <Icon icon="radix-icons:update" />
       <AlertTitle>Es gab ein Update!</AlertTitle>
       <AlertDescription>
-        Aktualisiert am 03.09.2024
+        Aktualisiert am 15.09.2024
       </AlertDescription>
     </Alert>
 
@@ -251,7 +276,7 @@ backlog = useOrderBy(backlog, ['title'], ['asc'])
         </TabsTrigger>
       </TabsList>
       <TabsContent value="current">
-        <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+        <div class="grid gap-2 md:grid-cols-2 md:gap-8 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
           <Card v-for="(game, index) in currentlyPlaying" :key="index">
             <CardHeader>
               <CardTitle>{{ game.title }}</CardTitle>
@@ -268,7 +293,7 @@ backlog = useOrderBy(backlog, ['title'], ['asc'])
         </div>
       </TabsContent>
       <TabsContent value="finished">
-        <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+        <div class="grid gap-2 md:grid-cols-2 md:gap-8 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
           <Card v-for="(game, index) in finishedGames" :key="index">
             <CardHeader>
               <CardTitle>{{ game.title }}</CardTitle>
@@ -283,7 +308,7 @@ backlog = useOrderBy(backlog, ['title'], ['asc'])
         </div>
       </TabsContent>
       <TabsContent value="backlog">
-        <div class="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6">
+        <div class="grid gap-2 md:grid-cols-2 md:gap-8 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
           <Card v-for="(game, index) in backlog" :key="index">
             <CardHeader>
               <CardTitle>{{ game.title }}</CardTitle>
